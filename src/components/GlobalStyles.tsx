@@ -5,7 +5,12 @@ const GlobalStyles = createGlobalStyle`
     ${reset};
     * {
         box-sizing: border-box;
-        font-family: 'Noto Sans KR', sans-serif !important;
+    }
+    a {
+        color: inherit;
+        &:hover {
+            color: inherit;
+        }
     }
 `;
 
