@@ -14,8 +14,7 @@ interface IProps {
 }
 
 const StyledButton = styled.button<IProps>`
-  padding: ${(props) =>
-    props.padding ? `${props.padding}px 16px` : "12px 16px"};
+  padding: ${(props) => (props.padding ? `${props.padding}` : "12px 16px")};
   outline: none;
   border: none;
   border-radius: 8px;
