@@ -4,7 +4,7 @@ import { reset } from "styled-reset";
 const GlobalStyles = createGlobalStyle`
     ${reset};
     * {
-        box-sizing: border-box;
+        box-sizing: border-box !important;
         font-family: 'Noto Sans KR', sans-serif !important;
     }
     a {
@@ -13,7 +13,9 @@ const GlobalStyles = createGlobalStyle`
             color: inherit;
         }
     }
-
+    body {
+        background-color: #f2f2f2;
+    }
     .red1 {
         color: #dc143c
     }
