@@ -5,6 +5,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
+import { Sidebar } from "../components/organisms";
 import {
   Home,
   Login,
@@ -18,6 +19,13 @@ import {
 export default () => (
   <Fragment>
     <Router>
+      <Sidebar
+        profileImg="https://visualpharm.com/assets/30/User-595b40b85ba036ed117da56f.svg"
+        profileAlt="user"
+        name="이찬형"
+        college="소프트웨어융합대학"
+        department="컴퓨터공학과"
+      />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
