@@ -19,6 +19,7 @@ const SideDiv = styled.div<{ height: number; open: boolean }>`
   width: ${(props) => (props.open ? "320px" : "60px")};
   min-width: ${(props) => props.open && "320px"};
   position: relative;
+  top: 0;
   left: 0;
   z-index: 10;
 `;
@@ -43,13 +44,16 @@ const Sidebar: React.FC<IProps> = ({
   const [open, setOpen] = useState<boolean>(true);
   useEffect(() => {
     const setHeight = () => {
-      const height = document.body.clientHeight;
+      const root = document.querySelector("#root") as HTMLDivElement;
+      const height = root.scrollHeight;
       setBodyHeight(height);
     };
     setHeight();
     window.addEventListener("resize", setHeight);
+    return () => {
+      window.removeEventListener("resize", setHeight);
+    };
   }, []);
-  console.log(open);
   const handleOpen = () => {
     setOpen((open) => !open);
   };
