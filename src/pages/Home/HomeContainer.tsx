@@ -2,11 +2,7 @@ import React from "react";
 import HomePresenter from "./HomePresenter";
 
 const HomeContainer: React.FC<{}> = () => {
-  return (
-    <div>
-      <HomePresenter />
-    </div>
-  );
+  return <HomePresenter />;
 };
 
 export default HomeContainer;
