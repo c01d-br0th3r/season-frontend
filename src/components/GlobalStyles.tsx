@@ -13,6 +13,11 @@ const GlobalStyles = createGlobalStyle`
             color: inherit;
         }
     }
+
+    #root {
+        width: 100%;
+        display: flex;
+    }
     body {
         background-color: #f2f2f2;
     }
