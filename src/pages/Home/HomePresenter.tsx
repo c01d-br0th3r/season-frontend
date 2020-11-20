@@ -4,8 +4,10 @@ import styled from "styled-components";
 import { Label } from "../../components/atoms";
 import Courses from "../../components/organisms/Courses";
 import Notices from "../../components/organisms/Notices";
-import Sidebar from "../../components/organisms/Sidebar";
 import TaskTracker from "../../components/organisms/TaskTracker";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 const Container = styled.div`
   width: 100%;
@@ -32,6 +34,15 @@ const Section = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 24px;
+`;
+
+const CalendarWapper = styled.div`
+  width: 100%;
+  height: 600px;
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px solid #c2c2c2;
 `;
 
 const Wrapper = styled.div`
@@ -105,16 +116,11 @@ const settings = {
   slidesToScroll: 1,
 };
 
+const localizer = momentLocalizer(moment);
+
 const HomePresenter: React.FC<{}> = () => {
   return (
     <Container>
-      <Sidebar
-        profileImg="https://visualpharm.com/assets/30/User-595b40b85ba036ed117da56f.svg"
-        profileAlt="user"
-        name="이찬형"
-        college="소프트웨어융합대학"
-        department="컴퓨터공학과"
-      />
       <Content>
         <SectionWrapper>
           <Section>
@@ -124,7 +130,7 @@ const HomePresenter: React.FC<{}> = () => {
               fontWeight="700"
               margin="0 0 16px 0"
             >
-              TaskTracker
+              Task Tracker
             </Label>
             <div style={{ width: "100%" }}>
               <Slider {...settings}>
@@ -146,6 +152,19 @@ const HomePresenter: React.FC<{}> = () => {
               <Courses data={courseData} />
               <Notices data={noticeData} />
             </Wrapper>
+          </Section>
+          <Section>
+            <Label
+              width="100%"
+              size="20px"
+              fontWeight="700"
+              margin="0 0 16px 0"
+            >
+              Calendar
+            </Label>
+            <CalendarWapper>
+              <Calendar localizer={localizer} events={[]} />
+            </CalendarWapper>
           </Section>
         </SectionWrapper>
       </Content>
