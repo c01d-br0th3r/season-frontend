@@ -19,7 +19,7 @@ const StyledDiv = styled.div`
   max-width: 480px;
   min-width: 400px;
   border: 1px solid #c2c2c2;
-  padding: 16px;
+  padding: 16px 24px;
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 10px 10px 20px 1px rgba(0, 0, 0, 0.05);
