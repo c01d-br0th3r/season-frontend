@@ -11,6 +11,7 @@ interface IProps {
   college: string;
   department: string;
   width?: string;
+  courseList: string[];
 }
 
 const SideDiv = styled.div<{ height: number; open: boolean }>`
@@ -39,6 +40,7 @@ const Sidebar: React.FC<IProps> = ({
   college,
   department,
   width,
+  courseList,
 }) => {
   const [bodyHeight, setBodyHeight] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(true);
@@ -88,7 +90,9 @@ const Sidebar: React.FC<IProps> = ({
               padding="16px"
               margin="8px 0 0 0"
             >
-              <Link to="/">Home</Link>
+              <Link to="/">
+                <i className="fas fa-home" style={{ width: "32px" }} /> Home
+              </Link>
             </Label>
             <Label
               size="18px"
@@ -96,7 +100,9 @@ const Sidebar: React.FC<IProps> = ({
               hexColor="#f2f2f2"
               padding="16px"
             >
-              <Link to="/mypage">MyPage</Link>
+              <Link to="/mypage">
+                <i className="fas fa-user" style={{ width: "32px" }} /> MyPage
+              </Link>
             </Label>
             <Label
               size="18px"
@@ -104,7 +110,15 @@ const Sidebar: React.FC<IProps> = ({
               hexColor="#f2f2f2"
               padding="16px"
             >
-              <Link to="/course">Course</Link>
+              <i className="fas fa-university" style={{ width: "32px" }} />{" "}
+              Course
+              {courseList.map((course, idx) => (
+                <Link to={`/course/${idx}/announcement`}>
+                  <Label margin="16px 0 0 16px" fontWeight="500">
+                    - {course}
+                  </Label>
+                </Link>
+              ))}
             </Label>
             <Label
               size="18px"
@@ -112,7 +126,10 @@ const Sidebar: React.FC<IProps> = ({
               hexColor="#f2f2f2"
               padding="16px"
             >
-              <Link to="/community">Community</Link>
+              <Link to="/community">
+                <i className="fas fa-archive" style={{ width: "32px" }} />
+                Community
+              </Link>
             </Label>
           </Fragment>
         )}

@@ -17,6 +17,7 @@ export const Base = () => {
       name="이찬형"
       college="소프트웨어융합대학"
       department="컴퓨터공학과"
+      courseList={["a", "b"]}
     />
   );
 };
