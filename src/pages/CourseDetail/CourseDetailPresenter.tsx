@@ -1,8 +1,19 @@
 import React from "react";
+import { Route, Link } from "react-router-dom";
 import styled from "styled-components";
+import { Label } from "../../components/atoms";
+import {
+  CourseAnnouncement,
+  CourseAssignments,
+  CourseTest,
+  CourseVideoList,
+} from "../../components/organisms/CourseComponents";
 
 interface IProps {
   id: string;
+  pathname: string;
+  lectureList: any[];
+  notice: any[];
 }
 
 const Container = styled.div`
@@ -31,12 +42,88 @@ const Section = styled.div`
   padding: 24px;
 `;
 
-const CourseDetailPresenter: React.FC<IProps> = ({ id }) => {
+const Header = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  div {
+    cursor: pointer;
+  }
+  font-size: 18px;
+  font-weight: 600;
+`;
+
+const Menu = styled.div<{ status: boolean }>`
+  color: ${(props) => (props.status ? "#d43958" : "#121212")};
+`;
+
+const CourseDetailPresenter: React.FC<IProps> = ({
+  id,
+  pathname,
+  lectureList,
+  notice,
+}) => {
   return (
     <Container>
       <Content>
+        <Label>{`course ID: ${id}`}</Label>
         <SectionWrapper>
-          <Section>{`Course Id: ${id}`}</Section>
+          <Section>
+            <Header className="course-header">
+              <Link to={`/course/${id}/announcement`}>
+                <Menu
+                  className="announcement"
+                  status={pathname === `/course/${id}/announcement`}
+                >
+                  공지사항
+                </Menu>
+              </Link>
+              <Link to={`/course/${id}/video`}>
+                <Menu
+                  className="video"
+                  status={pathname === `/course/${id}/video`}
+                >
+                  강의
+                </Menu>
+              </Link>
+              <Link to={`/course/${id}/assignment`}>
+                <Menu
+                  className="assignment"
+                  status={pathname === `/course/${id}/assignment`}
+                >
+                  과제
+                </Menu>
+              </Link>
+              <Link to={`/course/${id}/test`}>
+                <Menu
+                  className="test"
+                  status={pathname === `/course/${id}/test`}
+                >
+                  시험
+                </Menu>
+              </Link>
+            </Header>
+          </Section>
+          <Route
+            exact
+            path={`/course/${id}/announcement`}
+            render={() => <CourseAnnouncement data={notice} />}
+          />
+          <Route
+            exact
+            path={`/course/${id}/video`}
+            render={() => <CourseVideoList lectureList={lectureList} />}
+          />
+          <Route
+            exact
+            path={`/course/${id}/assignment`}
+            render={() => <CourseAssignments />}
+          />
+          <Route
+            exact
+            path={`/course/${id}/test`}
+            render={() => <CourseTest />}
+          />
         </SectionWrapper>
       </Content>
     </Container>
