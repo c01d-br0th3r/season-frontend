@@ -15,7 +15,7 @@ interface IProps {
 
 const StyledDiv = styled.div`
   width: 100%;
-  max-width: 480px;
+  max-width: 1080px;
   min-width: 400px;
   border: 1px solid #c2c2c2;
   padding: 16px;
