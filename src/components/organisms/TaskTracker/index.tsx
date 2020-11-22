@@ -72,21 +72,22 @@ const TaskTracker: React.FC<IProps> = ({ title, professor }) => {
         <Section>
           <div>
             <Label fontWeight="600" margin="0 0 12px 0">
-              시간
+              <i className="far fa-clock" style={{ width: "30px" }} /> 시간
             </Label>
-            <ProgressBar now={80} variant="warning" label="180분" />
+            <ProgressBar now={80} variant="warning b_red2" label="180분" />
           </div>
           <div>
             <Label fontWeight="600" margin="12px 0 12px 0">
-              점수
+              <i className="far fa-star" style={{ width: "30px" }} /> 점수
             </Label>
-            <ProgressBar now={92} variant="danger" label="230.0점" />
+            <ProgressBar now={92} variant="danger b_red2" label="230.0점" />
           </div>
           <div>
             <Label fontWeight="600" margin="12px 0 12px 0">
+              <i className="far fa-check-circle" style={{ width: "30px" }} />{" "}
               출석
             </Label>
-            <ProgressBar now={100} variant="warning" label="12회" />
+            <ProgressBar now={100} variant="warning b_red2" label="12회" />
           </div>
         </Section>
       </SectionWrapper>
