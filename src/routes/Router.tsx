@@ -16,6 +16,13 @@ import {
   CommunityDetail,
 } from "../pages";
 
+const courseList = [
+  "자료구조및실습(003)",
+  "컴퓨터구조(001)",
+  "ES-디지털스토리텔링(001)",
+  "English Reading Practice 1 (011)",
+];
+
 export default () => (
   <Fragment>
     <Router>
@@ -25,6 +32,7 @@ export default () => (
         name="이찬형"
         college="소프트웨어융합대학"
         department="컴퓨터공학과"
+        courseList={courseList}
       />
       <Switch>
         <Route exact path="/" component={Home} />
