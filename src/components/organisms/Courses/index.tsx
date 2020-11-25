@@ -1,8 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import CourseList from "../../molecules/CourseList";
 
 interface IData {
+  id: number;
   name: string;
   classNumber: string;
   professor: string;
@@ -29,7 +31,9 @@ const Courses: React.FC<IProps> = ({ data }) => {
   return (
     <StyledDiv>
       {data.map((d) => (
-        <CourseList data={d} />
+        <Link to={`course/${d.id}/announcement`}>
+          <CourseList data={d} />
+        </Link>
       ))}
     </StyledDiv>
   );
