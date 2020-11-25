@@ -20,6 +20,7 @@ const StyledDiv = styled.div`
   justify-content: space-between;
   padding: 16px 0;
   border-bottom: 1px solid #f2f2f2;
+  cursor: pointer;
 `;
 
 const Number = styled.span`
@@ -27,12 +28,18 @@ const Number = styled.span`
 `;
 
 const NoticeList: React.FC<IProps> = ({ data }) => {
+  const handleClick = () => {
+    const bg = document.querySelector(".modal-bg");
+    const modal = document.querySelector(".my-modal");
+    bg?.classList.remove("hide");
+    modal?.classList.remove("hide");
+  };
   return (
-    <StyledDiv>
-      <Label fontWeight="600">
+    <StyledDiv onClick={handleClick} id={`${data.id}`}>
+      <Label fontWeight="600" id={`${data.id}`}>
         <Number>#{data.id}</Number> {data.title}
       </Label>
-      <Label hexColor="#a2a2a2" fontWeight="500" size="14px">
+      <Label hexColor="#161111" fontWeight="500" size="14px" id={`${data.id}`}>
         {data.writter}
       </Label>
     </StyledDiv>
