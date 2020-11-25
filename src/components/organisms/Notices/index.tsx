@@ -12,6 +12,7 @@ interface IData {
 
 interface IProps {
   data: IData[];
+  handleClick?: (e: React.MouseEvent) => void;
 }
 
 const StyledDiv = styled.div`
@@ -25,9 +26,9 @@ const StyledDiv = styled.div`
   box-shadow: 10px 10px 20px 1px rgba(0, 0, 0, 0.05);
 `;
 
-const Notices: React.FC<IProps> = ({ data }) => {
+const Notices: React.FC<IProps> = ({ data, handleClick }) => {
   return (
-    <StyledDiv>
+    <StyledDiv onClick={handleClick}>
       {data.map((d) => (
         <NoticeList data={d} />
       ))}
