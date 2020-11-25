@@ -5,9 +5,17 @@ import { Label } from "../../components/atoms";
 import Courses from "../../components/organisms/Courses";
 import Notices from "../../components/organisms/Notices";
 import TaskTracker from "../../components/organisms/TaskTracker";
+import Modal from "../../components/organisms/Modal";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+
+interface IProps {
+  handleNoticeClick: (e: React.MouseEvent) => void;
+  modalInfo: any;
+  courseData: any[];
+  noticeData: any[];
+}
 
 const Container = styled.div`
   width: 100%;
@@ -50,63 +58,15 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-const courseData = [
-  {
-    name: "알고리즘및실습",
-    classNumber: "003",
-    professor: "국형준",
-    isMajor: true,
-  },
-  {
-    name: "컴퓨터구조",
-    classNumber: "001",
-    professor: "송상훈",
-    isMajor: true,
-  },
-  {
-    name: "ES-디지털스토리텔링",
-    classNumber: "001",
-    professor: "국형준",
-    isMajor: true,
-  },
-  {
-    name: "English Reading Practice 1",
-    classNumber: "011",
-    professor: "Jordan",
-    isMajor: false,
-  },
-];
-
-const noticeData = [
-  {
-    id: 1,
-    title: "Season 이용 안내",
-    writter: "관리자",
-    time: "2020/11/09",
-    content: "잘 쓰세요!",
-  },
-  {
-    id: 2,
-    title: "Season 이용 안내1",
-    writter: "관리자",
-    time: "2020/11/09",
-    content: "잘 쓰세요!",
-  },
-  {
-    id: 3,
-    title: "Season 이용 안내2",
-    writter: "관리자",
-    time: "2020/11/09",
-    content: "잘 쓰세요!",
-  },
-  {
-    id: 4,
-    title: "Season 이용 안내3",
-    writter: "관리자",
-    time: "2020/11/09",
-    content: "잘 쓰세요!",
-  },
-];
+const TitleWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #c2c2c2;
+`;
 
 const settings = {
   dots: true,
@@ -118,7 +78,13 @@ const settings = {
 
 const localizer = momentLocalizer(moment);
 
-const HomePresenter: React.FC<{}> = () => {
+const HomePresenter: React.FC<IProps> = ({
+  courseData,
+  noticeData,
+  modalInfo,
+  handleNoticeClick,
+}) => {
+  console.log(modalInfo);
   return (
     <Container>
       <Content>
@@ -150,7 +116,7 @@ const HomePresenter: React.FC<{}> = () => {
             </Label>
             <Wrapper>
               <Courses data={courseData} />
-              <Notices data={noticeData} />
+              <Notices data={noticeData} handleClick={handleNoticeClick} />
             </Wrapper>
           </Section>
           <Section>
@@ -168,6 +134,20 @@ const HomePresenter: React.FC<{}> = () => {
           </Section>
         </SectionWrapper>
       </Content>
+      <Modal>
+        <TitleWrapper>
+          <div>
+            <Label fontWeight="600" size="20px" margin="0 0 8px 0">
+              {modalInfo && modalInfo.title}
+            </Label>
+            <Label fontWeight="500" size="16px" hexColor="#a2a2a2">
+              {modalInfo && modalInfo.time}
+            </Label>
+          </div>
+          <Label fontWeight="500">{modalInfo && modalInfo.writter}</Label>
+        </TitleWrapper>
+        <Label>{modalInfo && modalInfo.content}</Label>
+      </Modal>
     </Container>
   );
 };
