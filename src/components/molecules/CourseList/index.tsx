@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Label } from "../../atoms";
 
 interface IData {
+  id: number;
   name: string;
   classNumber: string;
   professor: string;

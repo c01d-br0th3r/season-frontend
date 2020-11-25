@@ -11,6 +11,7 @@ export default {
 
 export const Base = () => {
   const data = {
+    id: 0,
     name: "알고리즘및실습",
     classNumber: "003",
     professor: "국형준",
