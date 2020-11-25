@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { RouteComponentProps } from "react-router-dom";
 import CourseDetailPresenter from "./CourseDetailPresenter";
 
@@ -8,28 +8,28 @@ interface IMatch {
 
 const noticeData = [
   {
-    id: 1,
+    id: "1",
     title: "Season 이용 안내",
     writter: "관리자",
     time: "2020/11/09",
     content: "잘 쓰세요!",
   },
   {
-    id: 2,
+    id: "2",
     title: "Season 이용 안내1",
     writter: "관리자",
     time: "2020/11/09",
     content: "잘 쓰세요!",
   },
   {
-    id: 3,
+    id: "3",
     title: "Season 이용 안내2",
     writter: "관리자",
     time: "2020/11/09",
     content: "잘 쓰세요!",
   },
   {
-    id: 4,
+    id: "4",
     title: "Season 이용 안내3",
     writter: "관리자",
     time: "2020/11/09",
