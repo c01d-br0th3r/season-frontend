@@ -87,6 +87,10 @@ const GlobalStyles = createGlobalStyle`
     .black {
         color: #121212 !important;;
     }
+
+    .hide {
+        display: none !important;
+    }
 `;
 
 export default GlobalStyles;
