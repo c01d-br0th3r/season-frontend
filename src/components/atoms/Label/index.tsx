@@ -11,6 +11,7 @@ interface IProps {
   padding?: string;
   border?: string;
   width?: string;
+  id?: string;
 }
 
 const StyledLabel = styled.div<IProps>`
@@ -33,6 +34,7 @@ const Label: React.FC<IProps> = ({
   padding,
   border,
   width,
+  id,
 }) => {
   return (
     <StyledLabel
@@ -44,6 +46,7 @@ const Label: React.FC<IProps> = ({
       padding={padding}
       border={border}
       width={width}
+      id={id}
     >
       {children}
     </StyledLabel>
