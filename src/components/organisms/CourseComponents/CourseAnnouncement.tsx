@@ -44,6 +44,7 @@ const CourseAnnouncement: React.FC<IProps> = ({ data }) => {
       <StyledDiv>
         {data.map((d) => (
           <Accordian
+            key={d.id}
             id={d.id}
             title={d.title}
             content={d.content}
