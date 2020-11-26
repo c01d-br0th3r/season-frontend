@@ -31,7 +31,7 @@ const Courses: React.FC<IProps> = ({ data }) => {
   return (
     <StyledDiv>
       {data.map((d) => (
-        <Link to={`course/${d.id}/announcement`}>
+        <Link key={d.id} to={`course/${d.id}/announcement`}>
           <CourseList data={d} />
         </Link>
       ))}

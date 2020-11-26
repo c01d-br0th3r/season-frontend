@@ -52,9 +52,6 @@ const Sidebar: React.FC<IProps> = ({
     };
     setHeight();
     window.addEventListener("resize", setHeight);
-    return () => {
-      window.removeEventListener("resize", setHeight);
-    };
   }, []);
   const handleOpen = () => {
     setOpen((open) => !open);
@@ -113,7 +110,7 @@ const Sidebar: React.FC<IProps> = ({
               <i className="fas fa-university" style={{ width: "32px" }} />{" "}
               Course
               {courseList.map((course, idx) => (
-                <Link to={`/course/${idx}/announcement`}>
+                <Link key={idx} to={`/course/${idx}/announcement`}>
                   <Label margin="16px 0 0 16px" fontWeight="500">
                     - {course}
                   </Label>

@@ -30,7 +30,7 @@ const Notices: React.FC<IProps> = ({ data, handleClick }) => {
   return (
     <StyledDiv onClick={handleClick}>
       {data.map((d) => (
-        <NoticeList data={d} />
+        <NoticeList key={d.id} data={d} />
       ))}
     </StyledDiv>
   );

@@ -78,7 +78,9 @@ const CollegeInfo: React.FC<IProps> = ({
           </Label>
           <TagsWrapper>
             {hashtags &&
-              hashtags.map((hashtag) => <HashTag>#{hashtag}</HashTag>)}
+              hashtags.map((hashtag, idx) => (
+                <HashTag key={idx}>#{hashtag}</HashTag>
+              ))}
           </TagsWrapper>
         </LabelContainer>
       </Info>

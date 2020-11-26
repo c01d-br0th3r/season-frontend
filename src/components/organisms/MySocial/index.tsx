@@ -27,7 +27,7 @@ const MySocial: React.FC<IProps> = ({ data }) => {
   return (
     <StyledDiv>
       {data.map((d) => (
-        <MySocialList data={d} />
+        <MySocialList key={d.id} data={d} />
       ))}
     </StyledDiv>
   );
