@@ -12,6 +12,7 @@ interface IProps {
   border?: string;
   width?: string;
   id?: string;
+  lineHeight?: string;
 }
 
 const StyledLabel = styled.div<IProps>`
@@ -22,6 +23,7 @@ const StyledLabel = styled.div<IProps>`
   padding: ${(props) => props.padding && props.padding};
   border: ${(props) => props.border && props.border};
   width: ${(props) => props.width && props.width};
+  line-height: ${(props) => props.lineHeight && props.lineHeight};
 `;
 
 const Label: React.FC<IProps> = ({
@@ -35,6 +37,7 @@ const Label: React.FC<IProps> = ({
   border,
   width,
   id,
+  lineHeight,
 }) => {
   return (
     <StyledLabel
@@ -47,6 +50,7 @@ const Label: React.FC<IProps> = ({
       border={border}
       width={width}
       id={id}
+      lineHeight={lineHeight}
     >
       {children}
     </StyledLabel>
