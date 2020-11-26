@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Switch, Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { Label } from "../../components/atoms";
 import {
@@ -14,6 +14,7 @@ interface IProps {
   pathname: string;
   lectureList: any[];
   notice: any[];
+  assignmentData: any[];
 }
 
 const Container = styled.div`
@@ -62,6 +63,7 @@ const CourseDetailPresenter: React.FC<IProps> = ({
   pathname,
   lectureList,
   notice,
+  assignmentData,
 }) => {
   return (
     <Container>
@@ -89,7 +91,7 @@ const CourseDetailPresenter: React.FC<IProps> = ({
               <Link to={`/course/${id}/assignment`}>
                 <Menu
                   className="assignment"
-                  status={pathname === `/course/${id}/assignment`}
+                  status={pathname.includes(`/course/${id}/assignment`)}
                 >
                   과제
                 </Menu>
@@ -104,26 +106,34 @@ const CourseDetailPresenter: React.FC<IProps> = ({
               </Link>
             </Header>
           </Section>
-          <Route
-            exact
-            path={`/course/${id}/announcement`}
-            render={() => <CourseAnnouncement data={notice} />}
-          />
-          <Route
-            exact
-            path={`/course/${id}/video`}
-            render={() => <CourseVideoList lectureList={lectureList} />}
-          />
-          <Route
-            exact
-            path={`/course/${id}/assignment`}
-            render={() => <CourseAssignments />}
-          />
-          <Route
-            exact
-            path={`/course/${id}/test`}
-            render={() => <CourseTest />}
-          />
+          <Switch>
+            <Route
+              exact
+              path={`/course/${id}/announcement`}
+              render={() => <CourseAnnouncement data={notice} />}
+            />
+            <Route
+              exact
+              path={`/course/${id}/video`}
+              render={() => <CourseVideoList lectureList={lectureList} />}
+            />
+            <Route
+              path={`/course/${id}/assignment`}
+              render={(props) => (
+                <CourseAssignments
+                  {...props}
+                  courseId={id}
+                  data={assignmentData}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={`/course/${id}/test`}
+              render={() => <CourseTest />}
+            />
+            <Redirect path="*" to="/" />
+          </Switch>
         </SectionWrapper>
       </Content>
     </Container>
