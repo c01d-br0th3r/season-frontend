@@ -5,6 +5,7 @@ import LoginPresenter from "./LoginPresenter";
 const LoginContainer: React.FC<RouteComponentProps> = ({ history }) => {
   const [id, setId] = useState<string>("");
   const [pw, setPw] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const handleIdChange = (e: ChangeEvent) => {
     const target = e.target as HTMLInputElement;
     setId(target.value);
@@ -14,7 +15,18 @@ const LoginContainer: React.FC<RouteComponentProps> = ({ history }) => {
     setPw(target.value);
   };
   const handleLogin = () => {
-    console.log(id, pw);
+    const errorMsg = document.querySelector(".error-message") as HTMLDivElement;
+    if (id.length === 0) {
+      setErrorMessage("아이디를 입력해주세요.");
+      errorMsg.classList.remove("hide");
+      return false;
+    }
+    if (pw.length === 0) {
+      setErrorMessage("비밀번호를 입력해주세요.");
+      errorMsg.classList.remove("hide");
+      return false;
+    }
+
     history.push("/");
   };
   return (
@@ -22,6 +34,7 @@ const LoginContainer: React.FC<RouteComponentProps> = ({ history }) => {
       handleIdChange={handleIdChange}
       handlePwChange={handlePwChange}
       handleLogin={handleLogin}
+      errorMessage={errorMessage}
     />
   );
 };

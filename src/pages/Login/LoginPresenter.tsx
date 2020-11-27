@@ -6,6 +6,7 @@ interface IProps {
   handleIdChange: (e: ChangeEvent) => void;
   handlePwChange: (e: ChangeEvent) => void;
   handleLogin: () => void;
+  errorMessage?: string | null;
 }
 
 const Wrapper = styled.div`
@@ -34,6 +35,7 @@ const LoginPresenter: React.FC<IProps> = ({
   handleIdChange,
   handlePwChange,
   handleLogin,
+  errorMessage,
 }) => {
   return (
     <Wrapper>
@@ -51,6 +53,9 @@ const LoginPresenter: React.FC<IProps> = ({
           margin="0px 0px 56px 0px"
           handleChange={handlePwChange}
         />
+        <Label margin="0 0 56px 0" color="hide error-message">
+          {errorMessage}
+        </Label>
         <Button
           width="100%"
           color="b_red2"
