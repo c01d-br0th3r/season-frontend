@@ -25,6 +25,11 @@ const List = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
 `;
 
 const ListWrapper = styled.div`
@@ -79,7 +84,9 @@ const AssignmentList: React.FC<RouteComponentProps & IProps> = ({
               ~{d.time}
             </Label>
           </List>
-          <Label lineHeight="1.5">{d.content}</Label>
+          <Label lineHeight="1.5" hexColor="#727272">
+            {d.content}
+          </Label>
         </ListWrapper>
       ))}
     </StyledDiv>
