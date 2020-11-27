@@ -8,6 +8,7 @@ import {
   CourseTest,
   CourseVideoList,
 } from "../../components/organisms/CourseComponents";
+import CourseTeam from "../../components/organisms/CourseComponents/CourseTeam";
 
 interface IProps {
   id: string;
@@ -15,6 +16,7 @@ interface IProps {
   lectureList: any[];
   notice: any[];
   assignmentData: any[];
+  testData: any[];
 }
 
 const Container = styled.div`
@@ -64,6 +66,7 @@ const CourseDetailPresenter: React.FC<IProps> = ({
   lectureList,
   notice,
   assignmentData,
+  testData,
 }) => {
   return (
     <Container>
@@ -99,9 +102,17 @@ const CourseDetailPresenter: React.FC<IProps> = ({
               <Link to={`/course/${id}/test`}>
                 <Menu
                   className="test"
-                  status={pathname === `/course/${id}/test`}
+                  status={pathname.includes(`/course/${id}/test`)}
                 >
                   시험
+                </Menu>
+              </Link>
+              <Link to={`/course/${id}/team`}>
+                <Menu
+                  className="team"
+                  status={pathname.includes(`/course/${id}/team`)}
+                >
+                  그룹
                 </Menu>
               </Link>
             </Header>
@@ -128,9 +139,14 @@ const CourseDetailPresenter: React.FC<IProps> = ({
               )}
             />
             <Route
-              exact
               path={`/course/${id}/test`}
-              render={() => <CourseTest />}
+              render={(props) => (
+                <CourseTest {...props} courseId={id} data={testData} />
+              )}
+            />
+            <Route
+              path={`/course/${id}/team`}
+              render={(props) => <CourseTeam {...props} />}
             />
             <Redirect path="*" to="/" />
           </Switch>
