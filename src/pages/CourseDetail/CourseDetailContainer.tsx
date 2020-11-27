@@ -83,6 +83,19 @@ const assignmentData = [
   },
 ];
 
+const testData = [
+  {
+    id: "1",
+    title: "TEST1",
+    questions: [
+      "이 LMS의 이름을 쓰세요.",
+      "본인의 학번을 쓰세요.",
+      "가장 좋아하는 교수님의 이름을 쓰세요.",
+    ],
+    time: "2020-11-28",
+  },
+];
+
 const CourseDetailContainer: React.FC<RouteComponentProps<IMatch>> = ({
   match,
   location,
@@ -94,6 +107,7 @@ const CourseDetailContainer: React.FC<RouteComponentProps<IMatch>> = ({
       lectureList={lectureList}
       notice={noticeData}
       assignmentData={assignmentData}
+      testData={testData}
     />
   );
 };
