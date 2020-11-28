@@ -55,7 +55,7 @@ const Accordian: React.FC<IProps> = ({ id, title, content, writter, time }) => {
           </Label>
         </TitleInfo>
         <Label id={id} fontWeight="500">
-          <i className="fas fa-caret-down" />
+          <i id={id} className="fas fa-caret-down" />
         </Label>
       </TitleWrapper>
       <ContentWrapper className={`hide accordian-${id} accordian-content`}>
