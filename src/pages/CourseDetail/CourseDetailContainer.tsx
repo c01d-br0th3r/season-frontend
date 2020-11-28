@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import CourseDetailPresenter from "./CourseDetailPresenter";
 
@@ -41,18 +41,22 @@ const lectureList = [
   {
     url: "https://youtu.be/3Q_oYDQ2whs",
     title: "WEEK 1, Google 코딩 면접 - 대학생과 함께해봅시다!",
+    isDone: true,
   },
   {
     url: "https://youtu.be/qz9tKlF431k",
     title: "WEEK 2, Google 코딩 면접 - 고등학생과 함께해봅시다!",
+    isDone: true,
   },
   {
     url: "https://youtu.be/gnkrDse9QKc",
     title: "WEEK 3, React 코딩 면접, 이정도는 합시다.",
+    isDone: false,
   },
   {
     url: "https://youtu.be/gq5yubc1u18",
     title: "WEEK 4, 동그란 털쟁이 아저씨가 코딩하며 웃는 영상",
+    isDone: false,
   },
 ];
 
@@ -96,10 +100,46 @@ const testData = [
   },
 ];
 
+let teamData = [
+  {
+    id: "1",
+    title: "12월 2일까지 조장님이 해야할 것",
+    writter: "이찬형",
+    time: "2020/11/29",
+    content: "관련 자료 조사해오기, 역할분담 하기",
+  },
+  {
+    id: "2",
+    title: "우리는 팀입니다!",
+    writter: "이찬형",
+    time: "2020/11/30",
+    content: "하나 둘 셋 파이팅",
+  },
+];
+
 const CourseDetailContainer: React.FC<RouteComponentProps<IMatch>> = ({
   match,
   location,
 }) => {
+  const [teamData, setTeamData] = useState<any>([
+    {
+      id: "1",
+      title: "12월 2일까지 조장님이 해야할 것",
+      writter: "이찬형",
+      time: "2020/11/29",
+      content: "관련 자료 조사해오기, 역할분담 하기",
+    },
+    {
+      id: "2",
+      title: "우리는 팀입니다!",
+      writter: "이찬형",
+      time: "2020/11/30",
+      content: "하나 둘 셋 파이팅",
+    },
+  ]);
+  const handleTeamData = (form: any) => {
+    setTeamData([...teamData, form]);
+  };
   return (
     <CourseDetailPresenter
       id={match.params.id}
@@ -108,6 +148,8 @@ const CourseDetailContainer: React.FC<RouteComponentProps<IMatch>> = ({
       notice={noticeData}
       assignmentData={assignmentData}
       testData={testData}
+      teamData={teamData}
+      handleTeamData={handleTeamData}
     />
   );
 };

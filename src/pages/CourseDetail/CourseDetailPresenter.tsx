@@ -17,6 +17,8 @@ interface IProps {
   notice: any[];
   assignmentData: any[];
   testData: any[];
+  teamData: any[];
+  handleTeamData: (form: any) => void;
 }
 
 const Container = styled.div`
@@ -67,6 +69,8 @@ const CourseDetailPresenter: React.FC<IProps> = ({
   notice,
   assignmentData,
   testData,
+  teamData,
+  handleTeamData,
 }) => {
   return (
     <Container>
@@ -146,7 +150,13 @@ const CourseDetailPresenter: React.FC<IProps> = ({
             />
             <Route
               path={`/course/${id}/team`}
-              render={(props) => <CourseTeam {...props} />}
+              render={(props) => (
+                <CourseTeam
+                  {...props}
+                  data={teamData}
+                  handleTeamData={handleTeamData}
+                />
+              )}
             />
             <Redirect path="*" to="/" />
           </Switch>
