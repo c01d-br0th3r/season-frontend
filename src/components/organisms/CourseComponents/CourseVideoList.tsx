@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
+import { Label } from "../../atoms";
 
 interface ILecture {
   url: string;
   title: string;
+  isDone: boolean;
 }
 
 interface IProps {
@@ -48,11 +50,18 @@ const LectureListWrapper = styled.div`
   box-shadow: 10px 10px 20px 1px rgba(0, 0, 0, 0.05);
 `;
 
+const ListWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #c2c2c2;
+`;
+
 const List = styled.div<{ status: boolean }>`
   font-size: 18px;
   font-weight: 500;
   padding: 18px 0;
-  border-bottom: 1px solid #c2c2c2;
   cursor: pointer;
   color: ${(props) => (props.status ? "#d43958" : "#121212")};
 `;
@@ -77,14 +86,26 @@ const CourseVideoList: React.FC<IProps> = ({ lectureList }) => {
       </PlayerWrapper>
       <LectureListWrapper>
         {lectureList.map((lecture, idx) => (
-          <List
-            key={idx}
-            id={`${idx}`}
-            onClick={handleClick}
-            status={idx === index}
-          >
-            {lecture.title}
-          </List>
+          <ListWrapper key={idx}>
+            <List
+              key={idx}
+              id={`${idx}`}
+              onClick={handleClick}
+              status={idx === index}
+            >
+              {lecture.title}
+            </List>
+            <Label>
+              {lecture.isDone ? (
+                <i
+                  className="fas fa-check-square"
+                  style={{ color: "#16a085" }}
+                />
+              ) : (
+                <i className="far fa-square" />
+              )}
+            </Label>
+          </ListWrapper>
         ))}
       </LectureListWrapper>
     </Container>
