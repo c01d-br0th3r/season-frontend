@@ -43,6 +43,18 @@ const StyledDiv = styled.div`
   }
 `;
 
+const Textarea = styled.textarea`
+  width: 100%;
+  height: 400px;
+  padding: 16px;
+  border: 1px solid #c2c2c2;
+  border-radius: 8px;
+  &:focus {
+    border: none;
+    outline: 2px solid #de8a9a;
+  }
+`;
+
 const BtnWrapper = styled.div`
   align-self: flex-end;
   text-align: right;
@@ -111,7 +123,7 @@ const CourseTeam: React.FC<RouteComponentProps & IProps> = ({
           <Label fontWeight="600" size="20px" margin="32px 0 16px 0">
             내용
           </Label>
-          <Input handleChange={handleContentChange} />
+          <Textarea onChange={handleContentChange} />
           <BtnWrapper>
             <Button
               color="b_red3"
