@@ -30,8 +30,11 @@ const TitleWrapper = styled.div`
 const TitleInfo = styled.div``;
 
 const ContentWrapper = styled.div`
+  display: block;
   width: 100%;
   margin-top: 16px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 `;
 
 const Accordian: React.FC<IProps> = ({ id, title, content, writter, time }) => {
