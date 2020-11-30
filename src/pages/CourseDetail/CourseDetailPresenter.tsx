@@ -139,13 +139,19 @@ const CourseDetailPresenter: React.FC<IProps> = ({
                   {...props}
                   courseId={id}
                   data={assignmentData}
+                  isAdmin={true}
                 />
               )}
             />
             <Route
               path={`/course/${id}/test`}
               render={(props) => (
-                <CourseTest {...props} courseId={id} data={testData} />
+                <CourseTest
+                  {...props}
+                  courseId={id}
+                  data={testData}
+                  isAdmin={true}
+                />
               )}
             />
             <Route
@@ -155,6 +161,8 @@ const CourseDetailPresenter: React.FC<IProps> = ({
                   {...props}
                   data={teamData}
                   handleTeamData={handleTeamData}
+                  courseId={id}
+                  isAdmin={true}
                 />
               )}
             />

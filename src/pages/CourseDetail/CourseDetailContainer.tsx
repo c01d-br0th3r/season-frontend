@@ -76,14 +76,14 @@ const assignmentData = [
     여러분이 가지고 있는 과제 3 프로그램을 자신이 설계한 CPU를 구현한 회로에서 실행해 보도록 권장합니다.\
     ",
     writter: "국형준",
-    time: "2020-11-27",
+    time: "~2020-11-27",
   },
   {
     id: "2",
     title: "HW2",
     content: "hw2",
     writter: "국형준",
-    time: "2020-11-28",
+    time: "~2020-11-28",
   },
 ];
 
@@ -91,12 +91,18 @@ const testData = [
   {
     id: "1",
     title: "TEST1",
+    writter: "국형준",
     questions: [
-      "이 LMS의 이름을 쓰세요.",
-      "본인의 학번을 쓰세요.",
-      "가장 좋아하는 교수님의 이름을 쓰세요.",
+      { content: "이 LMS의 이름을 쓰세요.", answer: "Season", point: 30 },
+      { content: "본인의 학번을 쓰세요.", ansewr: "17011550", point: 20 },
+      {
+        content: "가장 좋아하는 교수님의 이름을 쓰세요.",
+        answer: "국형준",
+        point: 100,
+      },
     ],
     time: "2020-11-28",
+    testTime: 3599,
   },
 ];
 
