@@ -4,6 +4,7 @@ import styled from "styled-components";
 interface IProps {
   placeholder?: string;
   margin?: string;
+  className?: string;
   handleChange?: (e: ChangeEvent) => void;
 }
 
@@ -20,12 +21,18 @@ const StyledInput = styled.input<IProps>`
   }
 `;
 
-const Input: React.FC<IProps> = ({ placeholder, margin, handleChange }) => {
+const Input: React.FC<IProps> = ({
+  placeholder,
+  margin,
+  handleChange,
+  className,
+}) => {
   return (
     <StyledInput
       placeholder={placeholder}
       margin={margin}
       onChange={handleChange}
+      className={className}
     />
   );
 };
