@@ -2,7 +2,9 @@ import React, { Fragment, useState } from "react";
 import { Link, Route, RouteComponentProps } from "react-router-dom";
 import styled from "styled-components";
 import { Button, Input, Label } from "../../atoms";
+import dummyGenerator from "../../atoms/dummyGenerator";
 import SubmitForm from "../SubmitForm";
+import TableView from "../TableView";
 
 interface IProps {
   isAdmin?: boolean;
@@ -100,9 +102,18 @@ const BoardList: React.FC<IProps> = ({
                 </Label>
               </TitleInfo>
             </Link>
-            <Label fontWeight="500">
-              <i className="fas fa-caret-right" />
-            </Label>
+            {!isAdmin && (
+              <Label fontWeight="500">
+                {d.isDone ? (
+                  <i
+                    className="fas fa-check-square"
+                    style={{ color: "#16a085" }}
+                  />
+                ) : (
+                  <i className="far fa-square" />
+                )}
+              </Label>
+            )}
           </TitleWrapper>
         ))}
         {isAdmin && (
@@ -149,7 +160,13 @@ const BoardDetail: React.FC<RouteComponentProps<IMatch> & IProps> = ({
         </Label>
         <Content>{target.content}</Content>
       </StyledDiv>
-      {detailAdmin && <SubmitForm handleClick={({}) => {}} />}
+      {detailAdmin ? (
+        <SubmitForm handleClick={({}) => {}} />
+      ) : (
+        <StyledDiv>
+          <TableView data={dummyGenerator()} />
+        </StyledDiv>
+      )}
     </Fragment>
   );
 };
