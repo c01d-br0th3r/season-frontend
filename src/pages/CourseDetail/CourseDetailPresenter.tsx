@@ -125,7 +125,7 @@ const CourseDetailPresenter: React.FC<IProps> = ({
             <Route
               exact
               path={`/course/${id}/announcement`}
-              render={() => <CourseAnnouncement data={notice} />}
+              render={() => <CourseAnnouncement data={notice} isAdmin={true} />}
             />
             <Route
               exact

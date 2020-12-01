@@ -8,6 +8,7 @@ interface IProps {
   content: string;
   writter: string;
   time: string;
+  isAdmin?: boolean;
 }
 
 const StyledDiv = styled.div`
@@ -37,7 +38,14 @@ const ContentWrapper = styled.div`
   word-wrap: break-word;
 `;
 
-const Accordian: React.FC<IProps> = ({ id, title, content, writter, time }) => {
+const Accordian: React.FC<IProps> = ({
+  id,
+  title,
+  content,
+  writter,
+  time,
+  isAdmin,
+}) => {
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
