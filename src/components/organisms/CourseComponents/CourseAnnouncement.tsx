@@ -1,6 +1,8 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import styled from "styled-components";
+import { Button, Label } from "../../atoms";
 import Accordian from "../Accordian";
+import SubmitForm from "../SubmitForm";
 
 interface IData {
   id: string;
@@ -12,11 +14,15 @@ interface IData {
 
 interface IProps {
   data: IData[];
+  isAdmin?: boolean;
 }
 
 const Container = styled.div`
   width: 100%;
   padding: 24px;
+  &:last-child {
+    padding-top: 0;
+  }
 `;
 
 const StyledDiv = styled.div`
@@ -38,22 +44,49 @@ const StyledDiv = styled.div`
   }
 `;
 
-const CourseAnnouncement: React.FC<IProps> = ({ data }) => {
+const BtnWrapper = styled.div`
+  align-self: flex-end;
+  text-align: right;
+`;
+
+const CourseAnnouncement: React.FC<IProps> = ({ data, isAdmin }) => {
+  const [open, setOpen] = useState<boolean>(false);
   return (
-    <Container>
-      <StyledDiv>
-        {data.map((d) => (
-          <Accordian
-            key={d.id}
-            id={d.id}
-            title={d.title}
-            content={d.content}
-            writter={d.writter}
-            time={d.time}
-          />
-        ))}
-      </StyledDiv>
-    </Container>
+    <Fragment>
+      <Container>
+        <StyledDiv>
+          {data.map((d) => (
+            <Accordian
+              key={d.id}
+              id={d.id}
+              title={d.title}
+              content={d.content}
+              writter={d.writter}
+              time={d.time}
+              isAdmin={isAdmin}
+            />
+          ))}
+          {isAdmin && (
+            <BtnWrapper>
+              <Button
+                color="b_red2"
+                margin="8px 0 8px 0"
+                handleClick={() => setOpen(!open)}
+              >
+                <Label hexColor="#f8f8f8" fontWeight="600">
+                  글쓰기
+                </Label>
+              </Button>
+            </BtnWrapper>
+          )}
+        </StyledDiv>
+      </Container>
+      {open && (
+        <Container>
+          <SubmitForm handleClick={({}) => {}} open={open} setOpen={setOpen} />
+        </Container>
+      )}
+    </Fragment>
   );
 };
 
