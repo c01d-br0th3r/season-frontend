@@ -15,6 +15,7 @@ interface IProps {
   handleTeamData: (form: any) => void;
   courseId: string;
   isAdmin?: boolean;
+  isTeamAdmin: boolean;
 }
 
 const CourseTeam: React.FC<RouteComponentProps & IProps> = ({
@@ -25,11 +26,12 @@ const CourseTeam: React.FC<RouteComponentProps & IProps> = ({
   match,
   courseId,
   isAdmin,
+  isTeamAdmin,
 }) => {
   return (
     <Fragment>
       <Board
-        isAdmin={isAdmin}
+        isAdmin={isTeamAdmin}
         data={data}
         match={match}
         courseId={courseId}

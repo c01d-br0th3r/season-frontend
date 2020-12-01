@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import ReactPlayer from "react-player";
 import styled from "styled-components";
-import { Label } from "../../atoms";
+import { Button, Label } from "../../atoms";
+import SubmitForm from "../SubmitForm";
 
 interface ILecture {
   url: string;
@@ -11,6 +12,7 @@ interface ILecture {
 
 interface IProps {
   lectureList: ILecture[];
+  isAdmin: boolean;
 }
 
 const Container = styled.div`
@@ -66,9 +68,16 @@ const List = styled.div<{ status: boolean }>`
   color: ${(props) => (props.status ? "#d43958" : "#121212")};
 `;
 
-const CourseVideoList: React.FC<IProps> = ({ lectureList }) => {
+const BtnWrapper = styled.div`
+  align-self: flex-end;
+  text-align: right;
+  margin-bottom: 16px;
+`;
+
+const CourseVideoList: React.FC<IProps> = ({ lectureList, isAdmin }) => {
   const [index, setIndex] = useState<number>(-1);
   const [url, setUrl] = useState<string>("");
+  const [open, setOpen] = useState<boolean>(false);
   const handleClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLDivElement;
     const id = parseInt(target.id);
@@ -95,19 +104,37 @@ const CourseVideoList: React.FC<IProps> = ({ lectureList }) => {
             >
               {lecture.title}
             </List>
-            <Label>
-              {lecture.isDone ? (
-                <i
-                  className="fas fa-check-square"
-                  style={{ color: "#16a085" }}
-                />
-              ) : (
-                <i className="far fa-square" />
-              )}
-            </Label>
+            {!isAdmin && (
+              <Label>
+                {lecture.isDone ? (
+                  <i
+                    className="fas fa-check-square"
+                    style={{ color: "#16a085" }}
+                  />
+                ) : (
+                  <i className="far fa-square" />
+                )}
+              </Label>
+            )}
           </ListWrapper>
         ))}
       </LectureListWrapper>
+      {isAdmin && (
+        <BtnWrapper>
+          <Button
+            color="b_red2"
+            margin="20px 0 0 0"
+            handleClick={() => setOpen(!open)}
+          >
+            <Label hexColor="#f8f8f8" fontWeight="600">
+              글쓰기
+            </Label>
+          </Button>
+        </BtnWrapper>
+      )}
+      {open && (
+        <SubmitForm handleClick={({}) => {}} open={open} setOpen={setOpen} />
+      )}
     </Container>
   );
 };

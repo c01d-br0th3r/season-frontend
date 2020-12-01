@@ -20,9 +20,6 @@ interface IProps {
 const Container = styled.div`
   width: 100%;
   padding: 24px;
-  &:last-child {
-    padding-top: 0;
-  }
 `;
 
 const StyledDiv = styled.div`
@@ -34,6 +31,7 @@ const StyledDiv = styled.div`
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 10px 10px 20px 1px rgba(0, 0, 0, 0.05);
+  margin-bottom: 16px;
   .accordian:last-child {
     margin-bottom: 0;
     border: none;
@@ -70,7 +68,7 @@ const CourseAnnouncement: React.FC<IProps> = ({ data, isAdmin }) => {
             <BtnWrapper>
               <Button
                 color="b_red2"
-                margin="8px 0 8px 0"
+                margin="20px 0 0 0"
                 handleClick={() => setOpen(!open)}
               >
                 <Label hexColor="#f8f8f8" fontWeight="600">
@@ -80,12 +78,10 @@ const CourseAnnouncement: React.FC<IProps> = ({ data, isAdmin }) => {
             </BtnWrapper>
           )}
         </StyledDiv>
-      </Container>
-      {open && (
-        <Container>
+        {open && (
           <SubmitForm handleClick={({}) => {}} open={open} setOpen={setOpen} />
-        </Container>
-      )}
+        )}
+      </Container>
     </Fragment>
   );
 };

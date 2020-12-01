@@ -15,6 +15,7 @@ interface IProps {
   data: IData[];
   handleClick?: (e: React.MouseEvent) => void;
   isAdmin?: boolean;
+  isDone?: boolean;
 }
 
 const CourseAssignments: React.FC<RouteComponentProps & IProps> = ({
@@ -28,7 +29,7 @@ const CourseAssignments: React.FC<RouteComponentProps & IProps> = ({
   return (
     <Board
       isAdmin={isAdmin}
-      detailAdmin={true}
+      detailAdmin={!isAdmin}
       data={data}
       match={match}
       courseId={courseId}

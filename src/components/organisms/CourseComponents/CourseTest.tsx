@@ -1,7 +1,10 @@
 import React, { useState, useEffect, Fragment } from "react";
+import { Tab } from "react-bootstrap";
 import { Link, Route, RouteComponentProps } from "react-router-dom";
 import styled from "styled-components";
 import { Button, Input, Label } from "../../atoms";
+import dummyGenerator from "../../atoms/dummyGenerator";
+import TableView from "../TableView";
 
 interface IMatch {
   id: string;
@@ -119,10 +122,14 @@ const TestList: React.FC<RouteComponentProps & IProps> = ({
   const [open, setOpen] = useState<boolean>(false);
   const [numberInput, setNumberInput] = useState<string>("");
   const [questionCount, setQuestionCount] = useState<any>(0);
-
+  const [timer, setTimer] = useState<string>("");
   const handleNumberChange = (e: React.ChangeEvent) => {
     const target = e.target as HTMLInputElement;
     setNumberInput(target.value);
+  };
+  const handleTimerChange = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    setTimer(target.value);
   };
   const handleCreate = () => {
     const number = parseInt(numberInput);
@@ -150,7 +157,7 @@ const TestList: React.FC<RouteComponentProps & IProps> = ({
       time: "2020-12-01",
       questions: qus,
       writter: "국형준",
-      testTime: 2399,
+      testTime: parseInt(timer),
     };
     console.log(form);
   };
@@ -191,6 +198,10 @@ const TestList: React.FC<RouteComponentProps & IProps> = ({
             총 문제 수
           </Label>
           <Input margin="0 0 32px 0" handleChange={handleNumberChange} />
+          <Label size="18px" fontWeight="600" margin="0 0 32px 0">
+            제한시간
+          </Label>
+          <Input margin="0 0 32px 0" handleChange={handleTimerChange} />
           <ButtonWrapper>
             <Button handleClick={handleCreate} margin="0 0 32px 0">
               <Label fontWeight="500">문제 생성</Label>
@@ -233,14 +244,17 @@ const TestList: React.FC<RouteComponentProps & IProps> = ({
 const TestDetail: React.FC<RouteComponentProps<IMatch> & IProps> = ({
   data,
   match,
+  isAdmin,
 }) => {
   const target = data.filter((d) => d.id === match.params.id)[0];
   const [timer, setTimer] = useState<number>(target.testTime);
   useEffect(() => {
-    const Counter = setInterval(() => {
-      setTimer((time) => time - 1);
-    }, 1000);
-    return () => clearInterval(Counter);
+    if (!isAdmin) {
+      const Counter = setInterval(() => {
+        setTimer((time) => time - 1);
+      }, 1000);
+      return () => clearInterval(Counter);
+    }
   }, []);
   const timeFormatter = (time: number): string => {
     let minute = Math.floor(time / 60).toString();
@@ -251,37 +265,48 @@ const TestDetail: React.FC<RouteComponentProps<IMatch> & IProps> = ({
   };
   return (
     <StyledDiv>
-      <List style={{ marginBottom: "24px" }}>
-        <Label fontWeight="600" size="24px">
-          {target.title}
-        </Label>
-        <Label hexColor="#DC143C" fontWeight="500" size="18px">
-          {target.time}
-        </Label>
-      </List>
-      <ButtonWrapper>
-        <Label fontWeight="500">남은 시간: {timeFormatter(timer)}</Label>
-      </ButtonWrapper>
-      <Questions>
-        {target.questions.map((q, idx) => (
-          <QuestionList key={idx}>
-            <ContentPoint>
-              <Label margin="0 0 12px 0" fontWeight="500">
-                Q. {q.content}
-              </Label>
-              <Point>{q.point}점</Point>
-            </ContentPoint>
-            <Input />
-          </QuestionList>
-        ))}
-      </Questions>
-      <ButtonWrapper>
-        <Button color="b_red1">
-          <Label hexColor="#f8f8f8" fontWeight="600">
-            제출
+      {isAdmin ? (
+        <Fragment>
+          <Label fontWeight="600" size="24px" margin="0 0 24px 0">
+            {target.title}
           </Label>
-        </Button>
-      </ButtonWrapper>
+          <TableView data={dummyGenerator()} />
+        </Fragment>
+      ) : (
+        <Fragment>
+          <List style={{ marginBottom: "24px" }}>
+            <Label fontWeight="600" size="24px">
+              {target.title}
+            </Label>
+            <Label hexColor="#DC143C" fontWeight="500" size="18px">
+              {target.time}
+            </Label>
+          </List>
+          <ButtonWrapper>
+            <Label fontWeight="500">남은 시간: {timeFormatter(timer)}</Label>
+          </ButtonWrapper>
+          <Questions>
+            {target.questions.map((q, idx) => (
+              <QuestionList key={idx}>
+                <ContentPoint>
+                  <Label margin="0 0 12px 0" fontWeight="500">
+                    Q. {q.content}
+                  </Label>
+                  <Point>{q.point}점</Point>
+                </ContentPoint>
+                <Input />
+              </QuestionList>
+            ))}
+          </Questions>
+          <ButtonWrapper>
+            <Button color="b_red1">
+              <Label hexColor="#f8f8f8" fontWeight="600">
+                제출
+              </Label>
+            </Button>
+          </ButtonWrapper>
+        </Fragment>
+      )}
     </StyledDiv>
   );
 };
@@ -302,7 +327,9 @@ const CourseTest: React.FC<RouteComponentProps & IProps> = ({
       />
       <Route
         path={`${match.path}/:id`}
-        render={(props) => <TestDetail {...props} data={data} />}
+        render={(props) => (
+          <TestDetail {...props} data={data} isAdmin={isAdmin} />
+        )}
       />
     </Container>
   );
