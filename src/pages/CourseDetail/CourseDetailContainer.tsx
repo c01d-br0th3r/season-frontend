@@ -77,6 +77,7 @@ const assignmentData = [
     ",
     writter: "국형준",
     time: "~2020-11-27",
+    isDone: true,
   },
   {
     id: "2",
@@ -84,13 +85,14 @@ const assignmentData = [
     content: "hw2",
     writter: "국형준",
     time: "~2020-11-28",
+    isDone: false,
   },
 ];
 
 const testData = [
   {
     id: "1",
-    title: "TEST1",
+    title: "중간고사",
     writter: "국형준",
     questions: [
       { content: "이 LMS의 이름을 쓰세요.", answer: "Season", point: 30 },
@@ -103,6 +105,24 @@ const testData = [
     ],
     time: "2020-11-28",
     testTime: 3599,
+    isDone: true,
+  },
+  {
+    id: "2",
+    title: "기말고사",
+    writter: "국형준",
+    questions: [
+      { content: "이 LMS의 이름을 쓰세요.", answer: "Season", point: 30 },
+      { content: "본인의 학번을 쓰세요.", ansewr: "17011550", point: 20 },
+      {
+        content: "가장 좋아하는 교수님의 이름을 쓰세요.",
+        answer: "국형준",
+        point: 100,
+      },
+    ],
+    time: "2020-11-30",
+    testTime: 3599,
+    isDone: false,
   },
 ];
 
@@ -134,6 +154,7 @@ const CourseDetailContainer: React.FC<RouteComponentProps<IMatch>> = ({
       writter: "이찬형",
       time: "2020/11/29",
       content: "관련 자료 조사해오기, 역할분담 하기",
+      isDone: true,
     },
     {
       id: "2",
@@ -141,6 +162,7 @@ const CourseDetailContainer: React.FC<RouteComponentProps<IMatch>> = ({
       writter: "이찬형",
       time: "2020/11/30",
       content: "하나 둘 셋 파이팅",
+      isDone: false,
     },
   ]);
   const handleTeamData = (form: any) => {
@@ -156,6 +178,8 @@ const CourseDetailContainer: React.FC<RouteComponentProps<IMatch>> = ({
       testData={testData}
       teamData={teamData}
       handleTeamData={handleTeamData}
+      isAdmin={true}
+      isTeamAdmin={true}
     />
   );
 };

@@ -8,6 +8,7 @@ import {
   CourseTest,
   CourseVideoList,
 } from "../../components/organisms/CourseComponents";
+import CourseAttendance from "../../components/organisms/CourseComponents/CourseAttendance";
 import CourseTeam from "../../components/organisms/CourseComponents/CourseTeam";
 
 interface IProps {
@@ -19,6 +20,8 @@ interface IProps {
   testData: any[];
   teamData: any[];
   handleTeamData: (form: any) => void;
+  isAdmin: boolean;
+  isTeamAdmin: boolean;
 }
 
 const Container = styled.div`
@@ -71,6 +74,8 @@ const CourseDetailPresenter: React.FC<IProps> = ({
   testData,
   teamData,
   handleTeamData,
+  isAdmin,
+  isTeamAdmin,
 }) => {
   return (
     <Container>
@@ -111,26 +116,41 @@ const CourseDetailPresenter: React.FC<IProps> = ({
                   시험
                 </Menu>
               </Link>
-              <Link to={`/course/${id}/team`}>
-                <Menu
-                  className="team"
-                  status={pathname.includes(`/course/${id}/team`)}
-                >
-                  그룹
-                </Menu>
-              </Link>
+              {isAdmin ? (
+                <Link to={`/course/${id}/attendance`}>
+                  <Menu
+                    className="team"
+                    status={pathname.includes(`/course/${id}/attendance`)}
+                  >
+                    출석부
+                  </Menu>
+                </Link>
+              ) : (
+                <Link to={`/course/${id}/team`}>
+                  <Menu
+                    className="team"
+                    status={pathname.includes(`/course/${id}/team`)}
+                  >
+                    그룹
+                  </Menu>
+                </Link>
+              )}
             </Header>
           </Section>
           <Switch>
             <Route
               exact
               path={`/course/${id}/announcement`}
-              render={() => <CourseAnnouncement data={notice} isAdmin={true} />}
+              render={() => (
+                <CourseAnnouncement data={notice} isAdmin={isAdmin} />
+              )}
             />
             <Route
               exact
               path={`/course/${id}/video`}
-              render={() => <CourseVideoList lectureList={lectureList} />}
+              render={() => (
+                <CourseVideoList lectureList={lectureList} isAdmin={isAdmin} />
+              )}
             />
             <Route
               path={`/course/${id}/assignment`}
@@ -139,7 +159,7 @@ const CourseDetailPresenter: React.FC<IProps> = ({
                   {...props}
                   courseId={id}
                   data={assignmentData}
-                  isAdmin={true}
+                  isAdmin={isAdmin}
                 />
               )}
             />
@@ -150,22 +170,30 @@ const CourseDetailPresenter: React.FC<IProps> = ({
                   {...props}
                   courseId={id}
                   data={testData}
-                  isAdmin={true}
+                  isAdmin={isAdmin}
                 />
               )}
             />
-            <Route
-              path={`/course/${id}/team`}
-              render={(props) => (
-                <CourseTeam
-                  {...props}
-                  data={teamData}
-                  handleTeamData={handleTeamData}
-                  courseId={id}
-                  isAdmin={true}
-                />
-              )}
-            />
+            {isAdmin ? (
+              <Route
+                path={`/course/${id}/attendance`}
+                render={(props) => <CourseAttendance {...props} />}
+              />
+            ) : (
+              <Route
+                path={`/course/${id}/team`}
+                render={(props) => (
+                  <CourseTeam
+                    {...props}
+                    data={teamData}
+                    handleTeamData={handleTeamData}
+                    courseId={id}
+                    isAdmin={isAdmin}
+                    isTeamAdmin={isTeamAdmin}
+                  />
+                )}
+              />
+            )}
             <Redirect path="*" to="/" />
           </Switch>
         </SectionWrapper>
