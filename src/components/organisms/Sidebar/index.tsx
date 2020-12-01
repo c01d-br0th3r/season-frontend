@@ -23,14 +23,24 @@ const SideDiv = styled.div<{ height: number; open: boolean }>`
   top: 0;
   left: 0;
   z-index: 10;
+  overflow: hidden;
 `;
 
-const Bar = styled.div`
-  position: absolute;
+const Info = styled.div`
+  width: 320px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+`;
+
+const Bar = styled.div<{ isOpen: boolean }>`
+  position: fixed;
   top: 16px;
-  right: 16px;
+  left: ${(props) => (props.isOpen ? "280px" : "18px")};
   font-size: 20px;
   color: #fff;
+  z-index: 30;
 `;
 
 const Sidebar: React.FC<IProps> = ({
@@ -52,6 +62,7 @@ const Sidebar: React.FC<IProps> = ({
     };
     setHeight();
     window.addEventListener("resize", setHeight);
+    window.addEventListener("click", setHeight);
   }, []);
   const handleOpen = () => {
     setOpen((open) => !open);
@@ -59,11 +70,11 @@ const Sidebar: React.FC<IProps> = ({
   return (
     <Fragment>
       <SideDiv open={open} height={bodyHeight}>
-        <Bar onClick={handleOpen}>
+        <Bar onClick={handleOpen} isOpen={open}>
           <i className="fas fa-bars" />
         </Bar>
         {open && (
-          <Fragment>
+          <Info>
             <Label
               size="32px"
               hexColor="#fff"
@@ -128,7 +139,7 @@ const Sidebar: React.FC<IProps> = ({
                 Community
               </Link>
             </Label>
-          </Fragment>
+          </Info>
         )}
       </SideDiv>
     </Fragment>
