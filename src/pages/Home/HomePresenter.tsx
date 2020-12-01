@@ -78,6 +78,27 @@ const settings = {
 
 const localizer = momentLocalizer(moment);
 
+const myEventList = [
+  {
+    title: "영상 제출",
+    start: new Date(2020, 11, 2),
+    end: new Date(2020, 11, 2),
+    allDay: true,
+  },
+  {
+    title: "발표",
+    start: new Date(2020, 11, 4),
+    end: new Date(2020, 11, 4),
+    allDay: true,
+  },
+  {
+    title: "컴퓨터구조 hw5",
+    start: new Date(2020, 11, 4),
+    end: new Date(2020, 11, 4),
+    allDay: true,
+  },
+];
+
 const HomePresenter: React.FC<IProps> = ({
   courseData,
   noticeData,
@@ -129,7 +150,7 @@ const HomePresenter: React.FC<IProps> = ({
               Calendar
             </Label>
             <CalendarWapper>
-              <Calendar localizer={localizer} events={[]} />
+              <Calendar localizer={localizer} events={myEventList} />
             </CalendarWapper>
           </Section>
         </SectionWrapper>
