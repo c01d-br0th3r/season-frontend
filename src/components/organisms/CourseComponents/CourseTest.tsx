@@ -23,6 +23,7 @@ interface IProps {
   data: IData[];
   handleClick?: (e: React.MouseEvent) => void;
   isAdmin?: boolean;
+  handleTestData: (form: any) => void;
 }
 
 const Container = styled.div`
@@ -118,6 +119,7 @@ const TestList: React.FC<RouteComponentProps & IProps> = ({
   match,
   data,
   isAdmin,
+  handleTestData,
 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const [numberInput, setNumberInput] = useState<string>("");
@@ -160,6 +162,8 @@ const TestList: React.FC<RouteComponentProps & IProps> = ({
       testTime: parseInt(timer),
     };
     console.log(form);
+    handleTestData(form);
+    setOpen((open) => !open);
   };
   return (
     <Fragment>
@@ -315,6 +319,7 @@ const CourseTest: React.FC<RouteComponentProps & IProps> = ({
   data,
   match,
   isAdmin,
+  handleTestData,
 }) => {
   return (
     <Container>
@@ -322,13 +327,23 @@ const CourseTest: React.FC<RouteComponentProps & IProps> = ({
         exact
         path={match.path}
         render={(props) => (
-          <TestList {...props} data={data} isAdmin={isAdmin} />
+          <TestList
+            {...props}
+            data={data}
+            isAdmin={isAdmin}
+            handleTestData={handleTestData}
+          />
         )}
       />
       <Route
         path={`${match.path}/:id`}
         render={(props) => (
-          <TestDetail {...props} data={data} isAdmin={isAdmin} />
+          <TestDetail
+            {...props}
+            data={data}
+            isAdmin={isAdmin}
+            handleTestData={handleTestData}
+          />
         )}
       />
     </Container>

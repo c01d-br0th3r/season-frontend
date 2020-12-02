@@ -13,6 +13,7 @@ interface ILecture {
 interface IProps {
   lectureList: ILecture[];
   isAdmin: boolean;
+  handleLectureData: (form: any) => void;
 }
 
 const Container = styled.div`
@@ -74,7 +75,11 @@ const BtnWrapper = styled.div`
   margin-bottom: 16px;
 `;
 
-const CourseVideoList: React.FC<IProps> = ({ lectureList, isAdmin }) => {
+const CourseVideoList: React.FC<IProps> = ({
+  lectureList,
+  isAdmin,
+  handleLectureData,
+}) => {
   const [index, setIndex] = useState<number>(-1);
   const [url, setUrl] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
@@ -133,7 +138,12 @@ const CourseVideoList: React.FC<IProps> = ({ lectureList, isAdmin }) => {
         </BtnWrapper>
       )}
       {open && (
-        <SubmitForm handleClick={({}) => {}} open={open} setOpen={setOpen} />
+        <SubmitForm
+          handleClick={handleLectureData}
+          open={open}
+          setOpen={setOpen}
+          isLecture
+        />
       )}
     </Container>
   );

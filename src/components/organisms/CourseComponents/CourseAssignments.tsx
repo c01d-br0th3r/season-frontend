@@ -16,6 +16,7 @@ interface IProps {
   handleClick?: (e: React.MouseEvent) => void;
   isAdmin?: boolean;
   isDone?: boolean;
+  handleAssignmentData: (form: any) => void;
 }
 
 const CourseAssignments: React.FC<RouteComponentProps & IProps> = ({
@@ -25,6 +26,7 @@ const CourseAssignments: React.FC<RouteComponentProps & IProps> = ({
   history,
   location,
   isAdmin,
+  handleAssignmentData,
 }) => {
   return (
     <Board
@@ -35,7 +37,7 @@ const CourseAssignments: React.FC<RouteComponentProps & IProps> = ({
       courseId={courseId}
       history={history}
       location={location}
-      handleSubmit={({}) => {}}
+      handleSubmit={handleAssignmentData}
     ></Board>
   );
 };

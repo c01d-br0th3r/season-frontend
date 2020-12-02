@@ -15,6 +15,7 @@ interface IData {
 interface IProps {
   data: IData[];
   isAdmin?: boolean;
+  handleNoticeData: (form: any) => void;
 }
 
 const Container = styled.div`
@@ -47,7 +48,11 @@ const BtnWrapper = styled.div`
   text-align: right;
 `;
 
-const CourseAnnouncement: React.FC<IProps> = ({ data, isAdmin }) => {
+const CourseAnnouncement: React.FC<IProps> = ({
+  data,
+  isAdmin,
+  handleNoticeData,
+}) => {
   const [open, setOpen] = useState<boolean>(false);
   return (
     <Fragment>
@@ -79,7 +84,11 @@ const CourseAnnouncement: React.FC<IProps> = ({ data, isAdmin }) => {
           )}
         </StyledDiv>
         {open && (
-          <SubmitForm handleClick={({}) => {}} open={open} setOpen={setOpen} />
+          <SubmitForm
+            handleClick={handleNoticeData}
+            open={open}
+            setOpen={setOpen}
+          />
         )}
       </Container>
     </Fragment>

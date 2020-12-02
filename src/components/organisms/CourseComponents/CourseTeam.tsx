@@ -32,6 +32,7 @@ const CourseTeam: React.FC<RouteComponentProps & IProps> = ({
     <Fragment>
       <Board
         isAdmin={isTeamAdmin}
+        isTeam={true}
         data={data}
         match={match}
         courseId={courseId}
