@@ -6,6 +6,7 @@ interface IProps {
   margin?: string;
   className?: string;
   handleChange?: (e: ChangeEvent) => void;
+  type?: string;
 }
 
 const StyledInput = styled.input<IProps>`
@@ -26,6 +27,7 @@ const Input: React.FC<IProps> = ({
   margin,
   handleChange,
   className,
+  type,
 }) => {
   return (
     <StyledInput
@@ -33,6 +35,7 @@ const Input: React.FC<IProps> = ({
       margin={margin}
       onChange={handleChange}
       className={className}
+      type={type}
     />
   );
 };
