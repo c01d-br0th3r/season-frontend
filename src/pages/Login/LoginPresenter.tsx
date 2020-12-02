@@ -52,6 +52,7 @@ const LoginPresenter: React.FC<IProps> = ({
           placeholder="비밀번호"
           margin="0px 0px 56px 0px"
           handleChange={handlePwChange}
+          type="password"
         />
         <Label margin="0 0 56px 0" color="hide error-message">
           {errorMessage}
