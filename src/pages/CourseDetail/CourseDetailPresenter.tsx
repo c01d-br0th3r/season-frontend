@@ -20,6 +20,10 @@ interface IProps {
   testData: any[];
   teamData: any[];
   handleTeamData: (form: any) => void;
+  handleNoticeData: (form: any) => void;
+  handleTestData: (form: any) => void;
+  handleAssignmentData: (form: any) => void;
+  handleLectureData: (form: any) => void;
   isAdmin: boolean;
   isTeamAdmin: boolean;
 }
@@ -76,6 +80,10 @@ const CourseDetailPresenter: React.FC<IProps> = ({
   handleTeamData,
   isAdmin,
   isTeamAdmin,
+  handleAssignmentData,
+  handleLectureData,
+  handleNoticeData,
+  handleTestData,
 }) => {
   return (
     <Container>
@@ -142,14 +150,22 @@ const CourseDetailPresenter: React.FC<IProps> = ({
               exact
               path={`/course/${id}/announcement`}
               render={() => (
-                <CourseAnnouncement data={notice} isAdmin={isAdmin} />
+                <CourseAnnouncement
+                  data={notice}
+                  isAdmin={isAdmin}
+                  handleNoticeData={handleNoticeData}
+                />
               )}
             />
             <Route
               exact
               path={`/course/${id}/video`}
               render={() => (
-                <CourseVideoList lectureList={lectureList} isAdmin={isAdmin} />
+                <CourseVideoList
+                  lectureList={lectureList}
+                  isAdmin={isAdmin}
+                  handleLectureData={handleLectureData}
+                />
               )}
             />
             <Route
@@ -160,6 +176,7 @@ const CourseDetailPresenter: React.FC<IProps> = ({
                   courseId={id}
                   data={assignmentData}
                   isAdmin={isAdmin}
+                  handleAssignmentData={handleAssignmentData}
                 />
               )}
             />
@@ -171,6 +188,7 @@ const CourseDetailPresenter: React.FC<IProps> = ({
                   courseId={id}
                   data={testData}
                   isAdmin={isAdmin}
+                  handleTestData={handleTestData}
                 />
               )}
             />
