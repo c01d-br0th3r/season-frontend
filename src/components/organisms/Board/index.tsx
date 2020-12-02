@@ -14,6 +14,7 @@ interface IProps {
   match: any;
   courseId: string;
   handleSubmit: (form: any) => void;
+  isTeam?: boolean;
 }
 
 interface IMatch {
@@ -141,6 +142,7 @@ const BoardDetail: React.FC<RouteComponentProps<IMatch> & IProps> = ({
   match,
   data,
   detailAdmin,
+  isTeam,
 }) => {
   const target = data.filter((d) => d.id === match.params.id)[0];
   console.log(target);
@@ -160,12 +162,16 @@ const BoardDetail: React.FC<RouteComponentProps<IMatch> & IProps> = ({
         </Label>
         <Content>{target.content}</Content>
       </StyledDiv>
-      {detailAdmin ? (
-        <SubmitForm handleClick={({}) => {}} />
-      ) : (
-        <StyledDiv>
-          <TableView data={dummyGenerator()} />
-        </StyledDiv>
+      {!isTeam && (
+        <Fragment>
+          {detailAdmin ? (
+            <SubmitForm handleClick={({}) => {}} />
+          ) : (
+            <StyledDiv>
+              <TableView data={dummyGenerator()} />
+            </StyledDiv>
+          )}
+        </Fragment>
       )}
     </Fragment>
   );
@@ -178,6 +184,7 @@ const Board: React.FC<RouteComponentProps & IProps> = ({
   isAdmin,
   handleSubmit,
   detailAdmin,
+  isTeam,
 }) => {
   return (
     <Container>
@@ -203,6 +210,7 @@ const Board: React.FC<RouteComponentProps & IProps> = ({
             data={data}
             handleSubmit={handleSubmit}
             detailAdmin={detailAdmin}
+            isTeam={isTeam}
           />
         )}
       />

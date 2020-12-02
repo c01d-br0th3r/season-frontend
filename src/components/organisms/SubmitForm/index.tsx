@@ -6,6 +6,7 @@ interface IProps {
   handleClick?: (form: any) => void;
   setOpen?: Dispatch<SetStateAction<boolean>>;
   open?: boolean;
+  isLecture?: boolean;
 }
 
 const StyledDiv = styled.div`
@@ -75,7 +76,12 @@ const FileName = styled.div`
   font-size: 14px;
 `;
 
-const SubmitForm: React.FC<IProps> = ({ handleClick, setOpen, open }) => {
+const SubmitForm: React.FC<IProps> = ({
+  handleClick,
+  setOpen,
+  open,
+  isLecture,
+}) => {
   const [inputTitle, setInputTitle] = useState<string>("");
   const [inputContent, setInputContent] = useState<string>("");
   const [inputFile, setInputFile] = useState<any>(null);
@@ -92,13 +98,22 @@ const SubmitForm: React.FC<IProps> = ({ handleClick, setOpen, open }) => {
     setInputFile(target.files);
   };
   const handleUserSubmit = () => {
-    const form = {
-      id: `${new Date().getUTCMilliseconds()}`,
-      title: inputTitle,
-      content: inputContent,
-      writter: "이찬형",
-      time: "2020/11/32",
-    };
+    let form = {};
+    if (!isLecture) {
+      form = {
+        id: `${new Date().getUTCMilliseconds()}`,
+        title: inputTitle,
+        content: inputContent,
+        writter: "이찬형",
+        time: "2020/11/32",
+      };
+    } else {
+      form = {
+        title: inputTitle,
+        url: inputContent,
+        isDone: false,
+      };
+    }
     console.log(form);
     if (open && setOpen) setOpen((open) => !open);
     if (handleClick) handleClick(form);
