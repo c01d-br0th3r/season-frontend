@@ -57,7 +57,7 @@ const Sidebar: React.FC<IProps> = ({
   useEffect(() => {
     const setHeight = () => {
       const root = document.querySelector("#root") as HTMLDivElement;
-      const height = root.scrollHeight;
+      const height = root.scrollHeight * 1.1;
       setBodyHeight(height);
     };
     setHeight();
@@ -127,6 +127,17 @@ const Sidebar: React.FC<IProps> = ({
                   </Label>
                 </Link>
               ))}
+            </Label>
+            <Label
+              size="18px"
+              fontWeight="500"
+              hexColor="#f2f2f2"
+              padding="16px"
+            >
+              <Link to="/messenger">
+                <i className="fas fa-envelope" style={{ width: "32px" }} />
+                Messenger
+              </Link>
             </Label>
             <Label
               size="18px"
