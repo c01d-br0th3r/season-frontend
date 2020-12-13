@@ -105,7 +105,6 @@ const HomePresenter: React.FC<IProps> = ({
   modalInfo,
   handleNoticeClick,
 }) => {
-  console.log(modalInfo);
   return (
     <Container>
       <Content>
