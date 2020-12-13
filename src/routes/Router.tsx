@@ -11,6 +11,7 @@ import {
   Login,
   MyPage,
   Course,
+  Messenger,
   Community,
   CourseDetail,
   CommunityDetail,
@@ -39,6 +40,7 @@ export default () => (
         <Route exact path="/login" component={Login} />
         <Route exact path="/mypage" component={MyPage} />
         <Route exact path="/course" component={Course} />
+        <Route path="/messenger" component={Messenger} />
         <Route exact path="/community" component={Community} />
         <Route path="/course/:id" component={CourseDetail} />
         <Route path="/community/:id" component={CommunityDetail} />
