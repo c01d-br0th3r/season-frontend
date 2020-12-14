@@ -38,6 +38,14 @@ const StyledDiv = styled.div`
   overflow: scroll;
 `;
 
+const InitDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  margin-bottom: 12px;
+`;
+
 const List = styled.div`
   width: 100%;
   display: flex;
@@ -106,8 +114,10 @@ const MessengerDetail: React.FC<RouteComponentProps<IMatch> & IProps> = ({
     if (betweenTimeHour < 24) {
       if (hours < 12) {
         return `오전 ${hours}:${minutes}`;
-      } else {
+      } else if (hours > 12) {
         return `오후 ${hours - 12}:${minutes}`;
+      } else {
+        return `오후 12:${minutes}`;
       }
     }
     let year = timeValue.getFullYear(); //yyyy
@@ -157,34 +167,33 @@ const MessengerDetail: React.FC<RouteComponentProps<IMatch> & IProps> = ({
           <div>Loading...</div>
         ) : (
           <Fragment>
-            {messages.map((msg) => (
-              <List key={msg.messageId}>
-                <ImageDiv status={msg._sender && msg._sender.userId === userId}>
-                  {/*<Image
-                    src="https://visualpharm.com/assets/30/User-595b40b85ba036ed117da56f.svg"
-                    alt="img"
-                    width="32px"
-                    height="32px"
-                    radius="16px"
-                  />*/}
-                  <Label margin="0 0 8px 0" fontWeight="500">
-                    {msg._sender && msg._sender.nickname}
-                  </Label>
-                </ImageDiv>
-                <InfoWrapper
-                  status={msg._sender && msg._sender.userId === userId}
-                >
-                  <Content
+            {messages.map((msg) =>
+              msg._sender ? (
+                <List key={msg.createdAt}>
+                  <ImageDiv
                     status={msg._sender && msg._sender.userId === userId}
                   >
-                    {msg.message}
-                  </Content>
-                  <Label fontWeight="500" size="14px" hexColor="#727272">
-                    {getLastMsgDate(msg.createdAt)}
-                  </Label>
-                </InfoWrapper>
-              </List>
-            ))}
+                    <Label margin="0 0 8px 0" fontWeight="500">
+                      {msg._sender && msg._sender.nickname}
+                    </Label>
+                  </ImageDiv>
+                  <InfoWrapper
+                    status={msg._sender && msg._sender.userId === userId}
+                  >
+                    <Content
+                      status={msg._sender && msg._sender.userId === userId}
+                    >
+                      {msg.message}
+                    </Content>
+                    <Label fontWeight="500" size="14px" hexColor="#727272">
+                      {getLastMsgDate(msg.createdAt)}
+                    </Label>
+                  </InfoWrapper>
+                </List>
+              ) : (
+                <InitDiv>{msg.message}</InitDiv>
+              )
+            )}
           </Fragment>
         )}
       </StyledDiv>
