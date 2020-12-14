@@ -14,7 +14,7 @@ const MessengerContainer: React.FC<RouteComponentProps> = ({ match }) => {
     c.unshift(channel);
     setGroupChannels(c);
     console.log(message);
-    setMessages((msg: any) => [...msg, message]);
+    setMessages((msg: any) => [message, ...msg]);
   };
   sb.addChannelHandler("UNIQUE_HANDLER_ID", channelHandler);
   useEffect(() => {

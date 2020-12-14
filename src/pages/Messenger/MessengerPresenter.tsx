@@ -23,6 +23,15 @@ const Container = styled.div`
 const Content = styled.div`
   padding: 20px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const SectionWrapper = styled.div`
+  width: 1020px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const MessengerPresenter: React.FC<IProps> = ({
@@ -38,30 +47,32 @@ const MessengerPresenter: React.FC<IProps> = ({
   return (
     <Container>
       <Content>
-        <Switch>
-          <Route
-            exact
-            path={match.path}
-            render={(props) => (
-              <MessengerList {...props} groupChannels={groupChannels} />
-            )}
-          />
-          <Route
-            path={`${match.path}/:id`}
-            render={(props) => (
-              <MessengerDetail
-                {...props}
-                groupChannels={groupChannels}
-                openChannel={openChannel}
-                sendMessage={sendMessage}
-                markAsRead={markAsRead}
-                userId={userId}
-                messages={messages}
-                setMessages={setMessages}
-              />
-            )}
-          />
-        </Switch>
+        <SectionWrapper>
+          <Switch>
+            <Route
+              exact
+              path={match.path}
+              render={(props) => (
+                <MessengerList {...props} groupChannels={groupChannels} />
+              )}
+            />
+            <Route
+              path={`${match.path}/:id`}
+              render={(props) => (
+                <MessengerDetail
+                  {...props}
+                  groupChannels={groupChannels}
+                  openChannel={openChannel}
+                  sendMessage={sendMessage}
+                  markAsRead={markAsRead}
+                  userId={userId}
+                  messages={messages}
+                  setMessages={setMessages}
+                />
+              )}
+            />
+          </Switch>
+        </SectionWrapper>
       </Content>
     </Container>
   );
